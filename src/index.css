@@ -40,6 +40,12 @@ h1 {
   min-width: 300px;
 }
 
+.MemberImg {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+}
+
 .MemberNameLink,
 .MemberNameLink:visited {
   color: #b5b7b7;

@@ -19,7 +19,7 @@ export const PointsListItem: FC<{ id: number; distance: number }> = ({
   if (status)
     return (
       <li className="MemberCard">
-        <img alt={info.name} src={info.image} height={100} width={100} />
+        <img alt={info.name} src={info.image} className="MemberImg" />
         <div>
           <a href={info.wiki} target="_blank" className="MemberNameLink">
             {info.name}
