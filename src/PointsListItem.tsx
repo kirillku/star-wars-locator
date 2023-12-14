@@ -19,12 +19,12 @@ export const PointsListItem: FC<{ id: number; distance: number }> = ({
   if (status)
     return (
       <li>
+        <img alt={info.name} src={info.image} height={100} width={100} />
         <div>
-          <img alt={info.name} src={info.image} height={100} width={100} />
           <a href={info.wiki} target="_blank">
             {info.name}
           </a>
-          <span>Distance: {Math.round(distance)}m</span>
+          <div>Distance: {Math.round(distance)}m</div>
         </div>
       </li>
     );
