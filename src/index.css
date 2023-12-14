@@ -16,15 +16,21 @@ h1 {
   text-transform: uppercase;
 }
 
-ul {
+#root {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  margin: 50px;
+}
+
+.List {
   padding: 0;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 24px;
-  margin: 50px;
 }
 
-li {
+.MemberCard {
   list-style-type: none;
   background: #1d1e1f;
   border-radius: 10px;
@@ -32,4 +38,10 @@ li {
   display: flex;
   gap: 10px;
   min-width: 300px;
+}
+
+.Map {
+  border-radius: 10px;
+  overflow: hidden;
+  flex: 500px;
 }

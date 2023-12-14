@@ -6,7 +6,7 @@ export const PointsList: FC<{ points: DistanceMemberPoint[] }> = ({
   points,
 }) => {
   return (
-    <ul>
+    <ul className="List">
       {points.map((point) => (
         <PointsListItem
           key={point.id}

@@ -1,5 +1,4 @@
 import { FC, useRef, useEffect } from "react";
-import "./Map.css";
 import { MemberPoint, Point } from "../types";
 import createMap from "./createMap";
 
@@ -18,7 +17,7 @@ const Map: FC<{
     return () => map.setTarget(undefined);
   }, []);
 
-  return <div ref={mapRef} className="ol-map" />;
+  return <div ref={mapRef} className="Map" />;
 };
 
 export default Map;
