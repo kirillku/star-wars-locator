@@ -1,7 +1,13 @@
 export interface Point {
-  id: number;
   lat: number;
   long: number;
+}
+export interface MemberPoint extends Point {
+  id: number;
+}
+
+export interface DistanceMemberPoint extends MemberPoint {
+  distance: number;
 }
 
 export interface PointInfo {

@@ -1,6 +1,6 @@
-import { Point, PointInfo } from "./types";
+import { MemberPoint, PointInfo } from "./types";
 
-export const getPoints = (): Promise<Point[]> =>
+export const getPoints = (): Promise<MemberPoint[]> =>
   fetch("https://aseevia.github.io/star-wars-frontend/data/secret.json")
     .then((res) => res.json())
     .then((res) => JSON.parse(atob(res.message)));

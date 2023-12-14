@@ -2,7 +2,10 @@ import { FC } from "react";
 import { useData } from "./useData";
 import { getPointInfo } from "./api";
 
-export const PointsListItem: FC<{ id: number }> = ({ id }) => {
+export const PointsListItem: FC<{ id: number; distance: number }> = ({
+  id,
+  distance,
+}) => {
   const [info, status] = useData(() => getPointInfo(id), [id]);
 
   if (status === "error") {
@@ -21,6 +24,7 @@ export const PointsListItem: FC<{ id: number }> = ({ id }) => {
           <a href={info.wiki} target="_blank">
             {info.name}
           </a>
+          <span>Distance: {Math.round(distance)}m</span>
         </div>
       </li>
     );
