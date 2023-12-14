@@ -40,6 +40,23 @@ h1 {
   min-width: 300px;
 }
 
+.MemberNameLink,
+.MemberNameLink:visited {
+  color: #b5b7b7;
+  font-weight: bold;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.MemberNameLink:hover {
+  color: white;
+}
+
+.MemberHomeworld {
+  text-transform: capitalize;
+}
+
 .Map {
   border-radius: 10px;
   overflow: hidden;

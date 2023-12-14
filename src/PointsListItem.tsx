@@ -21,10 +21,15 @@ export const PointsListItem: FC<{ id: number; distance: number }> = ({
       <li className="MemberCard">
         <img alt={info.name} src={info.image} height={100} width={100} />
         <div>
-          <a href={info.wiki} target="_blank">
+          <a href={info.wiki} target="_blank" className="MemberNameLink">
             {info.name}
           </a>
-          <div>Distance: {Math.round(distance)}m</div>
+          {info.homeworld && (
+            <div>
+              Lives in <span className="MemberHomeworld">{info.homeworld}</span>
+            </div>
+          )}
+          <div>{Math.round(distance / 1000)} km away</div>
         </div>
       </li>
     );
