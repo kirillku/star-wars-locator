@@ -1,30 +1,15 @@
-# React + TypeScript + Vite
+# Star Wars Locator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Coding assignment for [star-wars-frontend](https://github.com/aseevia/star-wars-frontend).
 
-Currently, two official plugins are available:
+Demo: [Star Wars Locator](https://kirillku.github.io/star-wars-locator/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Technical Decisions
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- `Vite` for bundling because it's simple and no need in custom config for such project
+- `React` because I know it better than other frameworks
+- Plain `React` because I don't need any extra features that React frameworks provide
+- Plain CSS for styling because the project is small and I only need a few classes
+- Keeping app state in the top component (while logic is in the hooks) because again the project is small and doesn't even need a React Context
+- `fetch` for HTTP reqeusts to keep app simple, it's good enough to make these two get API calls
+- OpenLayers for map rendering because it's used in Grundium (based on job ad)
