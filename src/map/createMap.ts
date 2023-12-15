@@ -4,14 +4,38 @@ import View from "ol/View";
 import Feature from "ol/Feature";
 import { fromLonLat } from "ol/proj";
 import { Coordinate } from "ol/coordinate";
+import { Icon, Style } from "ol/style";
 import VectorSource from "ol/source/Vector";
 import OSM from "ol/source/OSM";
 import TileLayer from "ol/layer/Tile";
 import VectorLayer from "ol/layer/Vector";
 import GeomPoint from "ol/geom/Point";
 
+const CURRENT_POSITION_MARKER_COLOR = "#4285f4";
+const MEMBER_POSITION_MARKER_COLOR = "#78909c";
+
 const fromPoint = (point: Point): Coordinate =>
-  fromLonLat([point.lat, point.long]);
+  fromLonLat([point.long, point.lat]);
+
+const getMarker = (
+  point: Point,
+  color: string = MEMBER_POSITION_MARKER_COLOR
+): Feature<GeomPoint> => {
+  const marker = new Feature({
+    geometry: new GeomPoint(fromPoint(point)),
+  });
+  marker.setStyle(
+    new Style({
+      image: new Icon({
+        color,
+        scale: 0.5,
+        crossOrigin: "anonymous",
+        src: "public/circle.svg",
+      }),
+    })
+  );
+  return marker;
+};
 
 const createMap = ({
   points,
@@ -24,9 +48,10 @@ const createMap = ({
 
   const markersLayer = new VectorLayer({
     source: new VectorSource({
-      features: points.map(
-        (p) => new Feature({ geometry: new GeomPoint(fromPoint(p)) })
-      ),
+      features: [
+        getMarker(position, CURRENT_POSITION_MARKER_COLOR),
+        ...points.map((p) => getMarker(p)),
+      ],
     }),
   });
 
