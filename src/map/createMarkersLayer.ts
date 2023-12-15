@@ -5,6 +5,7 @@ import VectorSource from "ol/source/Vector";
 import VectorLayer from "ol/layer/Vector";
 import GeomPoint from "ol/geom/Point";
 import fromPoint from "./fromPoint";
+import circleSrc from "./circle.svg";
 
 const CURRENT_POSITION_MARKER_COLOR = "#4285f4";
 const MEMBER_POSITION_MARKER_COLOR = "#78909c";
@@ -22,7 +23,7 @@ const getMarker = (
         color,
         scale: 0.5,
         crossOrigin: "anonymous",
-        src: "public/circle.svg",
+        src: circleSrc,
       }),
     })
   );
