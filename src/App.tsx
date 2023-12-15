@@ -7,7 +7,7 @@ import { useCurrentPosition } from "./useCurrentPosition";
 const App: FC = () => {
   const [{ position, status: positionStatus, message }, getCurrentPosition] =
     useCurrentPosition();
-  const [points, pointsStatus] = usePoints(position);
+  const { points, status: pointsStatus } = usePoints(position);
 
   return (
     <>

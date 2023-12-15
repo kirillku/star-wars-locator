@@ -4,6 +4,7 @@ import { DistanceMemberPoint, MemberPoint, Point } from "./types";
 import { useData } from "./useData";
 import { getLength } from "ol/sphere";
 import fromPoint from "./map/fromPoint";
+import { useMemo } from "react";
 
 const getDistance = (a: Point, b: Point): number =>
   getLength(new LineString([fromPoint(a), fromPoint(b)]));
@@ -16,20 +17,21 @@ const sortByDistance = (points: MemberPoint[], position?: Point | null) =>
     }))
     .sort((a, b) => a.distance - b.distance);
 
-export const usePoints = (
-  position?: Point | null
-): [null, "loading"] | [null, "error"] | [DistanceMemberPoint[], "success"] => {
-  const [points, pointsStatus] = useData(getPoints);
+type PointsState = {
+  points: DistanceMemberPoint[];
+  status: "success" | "loading" | "error";
+};
 
-  if (pointsStatus === "loading") {
-    return [null, "loading"];
-  }
+export const usePoints = (position?: Point | null): PointsState => {
+  const { data: points, status } = useData(getPoints);
 
-  if (pointsStatus === "error") {
-    return [null, "error"];
-  }
+  const pointsState = useMemo<PointsState>(
+    () => ({
+      points: status !== "success" ? [] : sortByDistance(points, position),
+      status,
+    }),
+    [points, position]
+  );
 
-  const distancePoints = sortByDistance(points, position);
-
-  return [distancePoints, "success"];
+  return pointsState;
 };

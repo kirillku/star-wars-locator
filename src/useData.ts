@@ -1,33 +1,37 @@
 import { DependencyList, useEffect, useState } from "react";
 
+type DataState<T> =
+  | { data: null; status: "loading"; message: string }
+  | { data: null; status: "error"; message: string }
+  | { data: T; status: "success"; message: string };
+
 export const useData = <T>(
   getData: () => Promise<T>,
   deps: DependencyList = []
-): [T, "success"] | [null, "loading"] | [string, "error"] => {
-  const [data, setData] = useState<T>();
-  const [status, setStatus] = useState<"success" | "loading" | "error">(
-    "loading"
-  );
-  const [error, setError] = useState<string>();
+): DataState<T> => {
+  const [state, setState] = useState<DataState<T>>({
+    data: null,
+    status: "loading",
+    message: "Loading...",
+  });
 
   useEffect(() => {
     getData()
-      .then((res) => {
-        setData(res);
-        setStatus("success");
+      .then((data) => {
+        setState({
+          data,
+          status: "success",
+          message: "",
+        });
       })
       .catch(() => {
-        setError("Error while loading data");
-        setStatus("error");
+        setState({
+          data: null,
+          status: "error",
+          message: "Error while loading data",
+        });
       });
   }, deps);
 
-  switch (status) {
-    case "error":
-      return [error!, status];
-    case "loading":
-      return [null, status];
-    case "success":
-      return [data!, status];
-  }
+  return state;
 };
