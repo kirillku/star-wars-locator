@@ -9,7 +9,11 @@ export const PointsListItem: FC<{ id: number; distance: number }> = ({
   const [info, status] = useData(() => getPointInfo(id), [id]);
 
   if (status === "error") {
-    return <div>Error</div>;
+    return (
+      <li className="MemberCard">
+        <div className="error">Error</div>
+      </li>
+    );
   }
 
   if (status === "loading") {

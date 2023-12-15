@@ -1,6 +1,7 @@
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   --border-radius: 10px;
+  --button-color: #fade4b;
 }
 
 body {
@@ -15,6 +16,27 @@ body {
 h1 {
   text-align: center;
   text-transform: uppercase;
+}
+
+button {
+  cursor: pointer;
+  background-color: var(--button-color);
+  border: 1px solid transparent;
+  color: black;
+  min-width: 210px;
+  height: 48px;
+  line-height: 24px;
+  border-radius: 24px;
+  letter-spacing: 0.25px;
+  font-weight: bold;
+  padding: 4px 20px;
+  box-shadow: none;
+  text-transform: uppercase;
+}
+
+button:hover {
+  border: 1px solid white;
+  box-shadow: 0 0 4px var(--button-color);
 }
 
 #root {
@@ -68,4 +90,14 @@ h1 {
   border-radius: var(--border-radius);
   overflow: hidden;
   flex: 500px;
+}
+
+.centered-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.error {
+  color: red;
 }

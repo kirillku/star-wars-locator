@@ -1,44 +1,50 @@
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
+import { Point } from "./types";
 
-interface Position {
-  lat: number;
-  long: number;
-}
+type PositionState = {
+  position: Point | null;
+  status: "idle" | "success" | "loading" | "error";
+  message: string;
+};
 
-export const useCurrentPosition = ():
-  | [Position, "success"]
-  | [null, "loading"]
-  | [string, "error"] => {
-  const [position, setPosition] = useState<Position>();
-  const [status, setStatus] = useState<"success" | "loading" | "error">(
-    "loading"
-  );
-  const [error, setError] = useState<string>();
+export const useCurrentPosition = (): [PositionState, () => void] => {
+  const [state, setState] = useState<PositionState>({
+    position: null,
+    status: "idle",
+    message: "",
+  });
 
-  useEffect(() => {
+  const getCurrentPosition = useCallback(() => {
     if (!navigator.geolocation) {
-      setError("Geolocation is not supported by your browser");
-      setStatus("error");
+      setState({
+        position: null,
+        status: "error",
+        message: "Geolocation is not supported by your browser",
+      });
     } else {
+      setState({
+        position: null,
+        status: "loading",
+        message: "Loading...",
+      });
       navigator.geolocation.getCurrentPosition(
         (p) => {
-          setPosition({ lat: p.coords.latitude, long: p.coords.longitude });
-          setStatus("success");
+          setState({
+            position: { lat: p.coords.latitude, long: p.coords.longitude },
+            status: "success",
+            message: "",
+          });
         },
         () => {
-          setError("Unable to retrieve your location");
-          setStatus("error");
+          setState({
+            position: null,
+            status: "error",
+            message: "Unable to retrieve your location",
+          });
         }
       );
     }
   }, []);
 
-  switch (status) {
-    case "error":
-      return [error!, status];
-    case "loading":
-      return [null, status];
-    case "success":
-      return [position!, status];
-  }
+  return [state, getCurrentPosition];
 };
