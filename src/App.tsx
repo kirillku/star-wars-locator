@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { PointsList } from "./PointsList";
+import { PointsList } from "./list/PointsList";
 import { usePoints } from "./usePoints";
 import Map from "./map/Map";
 import { useCurrentPosition } from "./useCurrentPosition";

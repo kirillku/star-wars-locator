@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { useData } from "./useData";
-import { getPointInfo } from "./api";
+import { useData } from "../useData";
+import { getPointInfo } from "../api";
 
 export const PointsListItem: FC<{ id: number; distance: number }> = ({
   id,

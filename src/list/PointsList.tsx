@@ -1,6 +1,6 @@
 import { FC } from "react";
+import { DistanceMemberPoint } from "../types";
 import { PointsListItem } from "./PointsListItem";
-import { DistanceMemberPoint } from "./types";
 
 export const PointsList: FC<{ points: DistanceMemberPoint[] }> = ({
   points,
