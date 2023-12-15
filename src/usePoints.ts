@@ -1,14 +1,19 @@
+import { LineString } from "ol/geom";
 import { getPoints } from "./api";
 import { DistanceMemberPoint, MemberPoint, Point } from "./types";
 import { useCurrentPosition } from "./useCurrentPosition";
 import { useData } from "./useData";
-import { getDistance } from "ol/sphere";
+import { getLength } from "ol/sphere";
+import fromPoint from "./map/fromPoint";
+
+const getDistance = (a: Point, b: Point): number =>
+  getLength(new LineString([fromPoint(a), fromPoint(b)]));
 
 const sortByDistance = (points: MemberPoint[], position: Point) =>
   points
     .map((p) => ({
       ...p,
-      distance: getDistance([p.lat, p.long], [position.lat, position.long]),
+      distance: getDistance(p, position),
     }))
     .sort((a, b) => a.distance - b.distance);
 

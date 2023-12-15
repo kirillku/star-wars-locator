@@ -2,20 +2,16 @@ import { MemberPoint, Point } from "../types";
 import Map from "ol/Map";
 import View from "ol/View";
 import Feature from "ol/Feature";
-import { fromLonLat } from "ol/proj";
-import { Coordinate } from "ol/coordinate";
 import { Icon, Style } from "ol/style";
 import VectorSource from "ol/source/Vector";
 import OSM from "ol/source/OSM";
 import TileLayer from "ol/layer/Tile";
 import VectorLayer from "ol/layer/Vector";
 import GeomPoint from "ol/geom/Point";
+import fromPoint from "./fromPoint";
 
 const CURRENT_POSITION_MARKER_COLOR = "#4285f4";
 const MEMBER_POSITION_MARKER_COLOR = "#78909c";
-
-const fromPoint = (point: Point): Coordinate =>
-  fromLonLat([point.long, point.lat]);
 
 const getMarker = (
   point: Point,
