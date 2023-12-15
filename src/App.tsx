@@ -5,9 +5,15 @@ import Map from "./map/Map";
 import { useCurrentPosition } from "./useCurrentPosition";
 
 const App: FC = () => {
-  const [{ position, status: positionStatus, message }, getCurrentPosition] =
-    useCurrentPosition();
-  const { points, status: pointsStatus } = usePoints(position);
+  const [
+    { position, status: positionStatus, message: positionMessage },
+    getCurrentPosition,
+  ] = useCurrentPosition();
+  const {
+    points,
+    status: pointsStatus,
+    message: pointsMessage,
+  } = usePoints(position);
 
   return (
     <>
@@ -20,13 +26,15 @@ const App: FC = () => {
           </button>
         </div>
       )}
-      {positionStatus === "error" && (
+      {(positionStatus === "error" || pointsStatus === "error") && (
         <div className="centered-content">
-          <div className="error">{message}</div>
+          <div className="error">
+            {positionMessage ?? pointsMessage ?? "Error"}
+          </div>
         </div>
       )}
-      {positionStatus === "loading" && (
-        <div className="centered-content">{message}</div>
+      {(positionStatus === "loading" || pointsStatus === "loading") && (
+        <div className="centered-content">Loading...</div>
       )}
       {positionStatus === "success" && pointsStatus === "success" && (
         <>

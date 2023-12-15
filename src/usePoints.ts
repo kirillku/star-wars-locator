@@ -20,15 +20,17 @@ const sortByDistance = (points: MemberPoint[], position?: Point | null) =>
 type PointsState = {
   points: DistanceMemberPoint[];
   status: "success" | "loading" | "error";
+  message: string;
 };
 
 export const usePoints = (position?: Point | null): PointsState => {
-  const { data: points, status } = useData(getPoints);
+  const { data: points, status, message } = useData(getPoints);
 
   const pointsState = useMemo<PointsState>(
     () => ({
       points: status !== "success" ? [] : sortByDistance(points, position),
       status,
+      message,
     }),
     [points, position]
   );
